@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Gasoline Prices Predictor</title>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+
+        <div id="content_container">
+            <div id="form_container">
+                <table class="content-table" id="tableid">
+                    <thead>
+                      <tr>
+                        <th>Month , n <br> months</th>
+                        <th>Gasoline Price <br> (Php per liter)</th>
+                        <th>Change (%)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd-row">
+                        <td>1</td>
+                        <td>66.36</td>
+                        <td></td>
+                      </tr>
+                      <tr class="even-row">
+                        <td>2</td>
+                        <td >66.02</td>
+                        <td>-0.51</td>
+                      </tr>
+                      <tr class="odd-row">
+                        <td>3</td>
+                        <td>71.20</td>
+                        <td>7.85</td>
+                      </tr>
+                      <tr class="even-row">
+                        <td>4</td>
+                        <td>72.19</td>
+                        <td>1.39</td>
+                      </tr>
+                      <tr class="odd-row">
+                        <td>5</td>
+                        <td>86.07</td> 
+                        <td>19.23</td>
+                      </tr>
+                      <tr class="even-row">
+                        <td>6</td>
+                        <td>91.32</td>
+                        <td>6.10</td>
+                      </tr>
+                      <tr class="odd-row">
+                        <td>7</td>
+                        <td>79.41</td>
+                        <td>-13.04</td>
+                      </tr>
+                      <tr class="even-row">
+                        <td>8</td>
+                        <td>74.97</td> 
+                        <td>-5.59</td>
+                      </tr>
+                      <tr class="odd-row">
+                        <td>9</td>
+                        <td>72.74</td>
+                        <td>-2.97</td>
+                      </tr>
+                      <tr class="even-row">
+                        <td>10</td>
+                        <td>62.75</td>
+                        <td>-13.73</td>
+                      </tr>   
+                      <tr class="odd-row">
+                        <td>11</td>
+                        <td>64.41</td>
+                        <td>2.65</td>
+                      </tr>
+                      <tr class="even-row">
+                        <td>12</td>
+                        <td>67.75</td>
+                        <td>5.19</td>
+                      </tr>      
+                    </tbody>
+                  </table>
+                <div id="form_header_container">
+                    <h2 id="form_header"> Gasoline Prices Predictor </h2>
+                </div>
+                <div id="form_content_container">
+                    <div id="form_content_inner_container">
+                        <input type="text" id="data_points"  placeholder="Enter the number of data points (2-4)" onkeypress="return isNumber(event)">
+                        <input type="text" id="months" placeholder="Enter the number of months after December 2022 (13-60)" onkeypress="return isNumber2(event)">
+                        <div id="button_container">
+                            <button onclick="estimate()">Estimate</button>
+                        </div>
+                    </div>
+                </div>
+                <canvas id="barChart" style="margin: 10px auto; margin-left: 600px; width: 690px; height: 300px; "></canvas>
+
+            </div>
+    
+        </div>
+        <p id="info"></p>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    //colours for each bar
+    var colorArray = ['red', 'green', 'yellow', 'blue'];
+    var finalDataSet = [];
+
+    function estimate()
+    {
+        var dataPoints = document.getElementById("data_points").value;
+        var nMonths = parseFloat(document.getElementById('months').value);
+
+        let x=[];
+        let y=[];
+        var myTab = document.getElementById('tableid');
+        var extraMonth;
+        
+        flag = 0;
+
+        if(nMonths == 13){
+            extraMonth = 'January 2023';
+        }
+        else if(nMonths == 14){
+            extraMonth = 'February 2023';
+        }
+        else if(nMonths == 15){
+            extraMonth = 'March 2023';
+        }
+        else if(nMonths == 16){
+            extraMonth = 'April 2023';
+        }
+        else if(nMonths == 17){
+            extraMonth = 'May 2023';
+        }
+        else if(nMonths == 18){
+            extraMonth = 'June 2023';
+        }
+        else if(nMonths == 19){
+            extraMonth = 'July 2023';
+        }
+        else if(nMonths == 20){
+            extraMonth = 'August 2023';
+        }
+        else if(nMonths == 21){
+            extraMonth = 'September 2023';
+        }
+        else if(nMonths == 22){
+            extraMonth = 'October 2023';
+        }
+        else if(nMonths == 23){
+            extraMonth = 'November 2023';
+        }
+        else if(nMonths == 24){
+            extraMonth = 'December 2023';
+        }
+        else if(nMonths == 25){
+            extraMonth = 'January 2024';
+        }
+        else if(nMonths == 26){
+            extraMonth = 'February 2024';
+        }
+        else if(nMonths == 27){
+            extraMonth = 'March 2024';
+        }
+        else if(nMonths == 28){
+            extraMonth = 'April 2024';
+        }
+        else if(nMonths == 29){
+            extraMonth = 'May 2024';
+        }
+        else if(nMonths == 30){
+            extraMonth = 'June 2024';
+        }
+        else if(nMonths == 31){
+            extraMonth = 'July 2024';
+        }
+        else if(nMonths == 32){
+            extraMonth = 'August 2024';
+        }
+        else if(nMonths == 33){
+            extraMonth = 'September 2024';
+        }
+        else if(nMonths == 34){
+            extraMonth = 'October 2024';
+        }
+        else if(nMonths == 35){
+            extraMonth = 'November 2024';
+        }
+        else if(nMonths == 36){
+            extraMonth = 'December 2024';
+        }
+        else if(nMonths == 37){
+            extraMonth = 'January 2025';
+        }
+        else if(nMonths == 38){
+            extraMonth = 'February 2025';
+        }
+        else if(nMonths == 39){
+            extraMonth = 'March 2025';
+        }
+        else if(nMonths == 40){
+            extraMonth = 'April 2025';
+        }
+        else if(nMonths == 41){
+            extraMonth = 'May 2025';
+        }
+        else if(nMonths == 42){
+            extraMonth = 'June 2025';
+        }
+        else if(nMonths == 43){
+            extraMonth = 'July 2025';
+        }
+        else if(nMonths == 44){
+            extraMonth = 'August 2025';
+        }
+        else if(nMonths == 45){
+            extraMonth = 'September 2025';
+        }
+        else if(nMonths == 46){
+            extraMonth = 'October 2025';
+        }
+        else if(nMonths == 47){
+            extraMonth = 'November 2025';
+        }
+        else if(nMonths == 48){
+            extraMonth = 'December 2025';
+        }
+        else if(nMonths == 49){
+            extraMonth = 'January 2026';
+        }
+        else if(nMonths == 50){
+            extraMonth = 'February 2026';
+        }
+        else if(nMonths == 51){
+            extraMonth = 'March 2026';
+        }
+        else if(nMonths == 52){
+            extraMonth = 'April 2026';
+        }
+        else if(nMonths == 53){
+            extraMonth = 'May 2026';
+        }
+        else if(nMonths == 54){
+            extraMonth = 'June 2026';
+        }
+        else if(nMonths == 55){
+            extraMonth = 'July 2026';
+        }
+        else if(nMonths == 56){
+            extraMonth = 'August 2026';
+        }
+        else if(nMonths == 57){
+            extraMonth = 'September 2026';
+        }
+        else if(nMonths == 58){
+            extraMonth = 'October 2026';
+        }
+        else if(nMonths == 59){
+            extraMonth = 'November 2026';
+        }
+        else if(nMonths == 60){
+            extraMonth = 'December 2026';
+        }
+
+        // LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
+        for (i = 1; i < myTab.rows.length; i++) 
+        {
+            
+            // GET THE CELLS COLLECTION OF THE CURRENT ROW.
+            var objCells = myTab.rows.item(i).cells;
+
+            // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
+            for (var j = 0; j<=1; j++) {
+                var cellVal1 = objCells.item(j).innerHTML;
+            }
+            y[flag] = parseFloat(cellVal1) ;     
+
+            // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
+            for (var j = 0; j<=0; j++) {
+                var cellVal2 = objCells.item(j).innerHTML;
+            }
+            x[flag] = parseFloat(cellVal2) ;    
+            flag++;
+        }
+      
+        if(dataPoints == '2')
+        {
+            var x0 = x[10]
+            var x1 = x[11]
+          
+            var y0 = y[10]
+            var y1 = y[11]
+
+            const A = y0;
+            const B = (y1-y0)/(x1-x0);
+            const f_x = y0 + B*(nMonths-x0);
+            const P_change = ((f_x-y1)/y1)*100;
+
+            const y_final = parseFloat(f_x.toFixed(2));
+            y.push(y_final);
+            finalDataSet = y;
+            
+            updateConfigAsNewObject(barChart, 'Philippine Peso per liter', colorArray, finalDataSet, extraMonth);
+            alert("At n= " + nMonths + ":" + "\n" + "A= "+ A +"\n"+"B= "+ B.toFixed(2) + 
+            "\n"+"Predicted Gasoline Price= "+ f_x.toFixed(2) + "₱ per liter" +"\n"+ "Percentage Change: "+ P_change.toFixed(2) +"%");
+        }
+
+        else if(dataPoints == '3')
+        {
+            var x0 = x[9];
+            var x1 = x[10];
+            var x2 = x[11];
+
+            var y0 = y[9];
+            var y1 = y[10];
+            var y2 = y[11];
+
+            const A = y0;
+            const B = (y1-y0)/(x1-x0);
+            const C = (((y2-y1)/(x2-x1)) - ((y1-y0)/(x1-x0))) / (x2-x0); 
+            const f_x = A + B*(nMonths-x0) + C*(nMonths-x1)*(nMonths-x0);
+            const P_change = ((f_x-y2)/y2)*100;
+
+            const y_final = parseFloat(f_x.toFixed(2));
+            y.push(y_final);
+            finalDataSet = y;
+            
+            updateConfigAsNewObject(barChart, 'Philippine Peso per liter', colorArray, finalDataSet, extraMonth);
+
+            //Updating the bar chart with updated data
+            updatedDataSet = y;
+            console.log(updatedDataSet);
+            updateBarGraph(barChart, 'Philippine Peso per liter', colorArray, y);
+    
+            alert("At n= " + nMonths + ":" + "\n" + "A= "+ A +"\n"+"B= "+ B.toFixed(2) +"\n"+"C= "+ C.toFixed(2) + 
+           "\n"+"Predicted Gasoline Price= "+ f_x.toFixed(2) + "₱ per liter" +"\n"+ "Percentage Change: "+ P_change.toFixed(2) +"%");
+        }
+        else if(dataPoints == '4')
+        {
+            var x0 = x[8];
+            var x1 = x[9];
+            var x2 = x[10];
+            var x3 = x[11];
+
+            var y0 = y[8];
+            var y1 = y[9];
+            var y2 = y[10];
+            var y3 = y[11];
+            
+            const A = y0;
+            const B = (y1-y0)/(x1-x0);
+            const C1 = (((y2-y1)/(x2-x1)) - ((y1-y0)/(x1-x0))) / (x2-x0); 
+            const C2 = (((y3-y2)/(x3-x2)) - ((y2-y1)/(x2-x1))) / (x3-x1)
+            const D = (C2 - C1) / (x3-x0);
+            const f_x = A + B*(nMonths-x0) + C1*(nMonths-x1)*(nMonths-x0) + D*(nMonths-x2)*(nMonths-x1)*(nMonths-x0);
+            const P_change = ((f_x-y3)/y3)*100;
+
+            const y_final = parseFloat(f_x.toFixed(2));
+            y.push(y_final);
+            finalDataSet = y;
+            
+            updateConfigAsNewObject(barChart, 'Philippine Peso per liter', colorArray, finalDataSet, extraMonth);
+
+
+            alert("At n= " + nMonths + ":" + "\n" + "A= "+ A +"\n"+"B= "+ B.toFixed(2) +"\n"+"C= "+ C1.toFixed(2) + 
+            "\n"+"D= "+ D.toFixed(2) + "\n"+"Predicted Gasoline Price= "+ f_x.toFixed(2) + "₱ per liter" +"\n"+ "Percentage Change: "+ P_change.toFixed(2) +"%");
+        }
+
+        //Function to update the bar chart
+        function updateConfigAsNewObject(chart, label, color, data, labels) {
+              chart.data.datasets.pop();
+              chart.data.labels.push(labels);
+              chart.data.datasets.push({
+                  label: label,
+                  backgroundColor: colorArray,
+                  data: data
+              });
+            chart.update();
+        }
+
+    }
+
+        //Vertical Bar Chart
+        const ctx = document.getElementById('barChart');
+
+        var barChart = new Chart(ctx, {
+            type: 'bar' ,
+            data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [{
+                label: 'Philippine Peso per liter',
+                data: [66.36, 66.02, 71.20, 72.19, 86.07, 91.32, 79.41, 74.97, 72.74, 62.75, 64.41, 67.75],
+                backgroundColor: colorArray,
+                borderWidth: 1
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+            }
+        });
+
+    function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 49 || charCode > 57)) {
+        return false;
+    }
+    return true;
+    }
+
+    function isNumber2(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 46 || charCode > 57 || charCode == 47)) {
+        return false;
+    }
+    return true;
+    }
+    </script>
+    <script src="index.js"></script>
+</html>

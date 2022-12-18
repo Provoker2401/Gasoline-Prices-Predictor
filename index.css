@@ -1,0 +1,227 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+.gradient-text {
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, #f3ec78, #af4261);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+
+#content_container {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    left: 5%;  /* 45% */
+}
+
+#form_container {
+    width: 100%;
+    height: 100%;
+
+    background-color: #370617;
+    box-shadow: 0 0 50px -20px #000;
+    border-radius: 2%;
+
+    overflow: hidden;
+}
+
+#form_header_container {
+    width: 100%;
+    height: 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+
+    padding: 20px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+
+    border-bottom: 1px solid transparent;
+    border-image: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF) 20;
+    background: #000;
+}
+
+#form_header {
+    display: inline-block;
+    font-size: 50px;
+    font-family: Bowlby One SC;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+
+    background: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+}
+
+#form_content_container {
+    width: 700px;
+    height: 230px;
+
+    float: right;
+
+    display: flex;
+    justify-content: center;
+    align-items: right;;
+    padding-top: 30px;
+    padding-right: 120px;
+}
+
+#form_content_inner_container {
+    width: 650px;
+    height: 200px;
+    align-items: right;
+    border: 3px;
+    float: right;
+
+}
+
+input {
+    width: 100%;
+    height: 40px;
+
+    padding-left: 10px;
+    margin-bottom: 20px;
+
+    background: #000;
+    font-family: Montserrat;
+    font-weight: 500;
+    color: #fff;
+    font-size: 20px;
+
+    border-bottom: 2px solid transparent;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+    border-image: -webkit-linear-gradient(25deg, #FFBE0B, #FB5607, #FF006E, #8338EC, #3A86FF) 1;
+}
+
+#button_container {
+    width: 650px;
+    height: 50px;
+
+    background-image: linear-gradient(80deg, #FFBE0B, #FB5607 , #FF006E , #8338EC);
+    color: #fff;
+
+    float: left;
+    margin-top: 5px;
+}
+
+#button_container button {
+    width: 100%;
+    height: 100%;
+    float: left;
+
+    background: transparent;
+    color: inherit;
+
+    font-family: Montserrat;
+    letter-spacing: 1px;
+    font-weight: 900;
+    font-size: 30px;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 10px 0;
+    margin-bottom: 100px  ;
+    font-size: 0.9em;
+    min-width: 500px;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    left: 4.5%;
+    top: 82px;
+}
+
+.content-table thead tr {
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    color: #ffffff;
+    text-align:center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.content-table th,
+.content-table td {
+    padding: 7px 10px;
+    text-align:center;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 18px;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #48a1a1fb;
+
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #47e9c9;
+}
+
+.content-table tbody tr.even-row {
+    font-weight: bold;
+    color: #000000;
+ /* Create the gradient. */
+  background-image: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);;
+ 
+ /* Set the background size and repeat properties. */
+ background-size: 100%;
+ background-repeat: repeat;
+
+ /* Use the text as a mask for the background. */
+ /* This will show the gradient as a text color rather than element bg. */
+ /* -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;  */
+}
+
+.content-table tbody tr:nth-of-type(odd) {
+    background-color: #131414fb;
+}
+
+.content-table tbody tr:first-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.content-table tbody tr.odd-row {
+    font-weight: bold;
+    color: #47f1cf
+}
+
+#myChart{
+    display: block;
+    box-sizing: border-box;
+
+}
